@@ -16,7 +16,7 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-grid3"></i><span>Product</span></a>
                                 <ul class="collapse">
                                     <li><a href="index.html">Product Data</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Product Category</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/productcategory'); ?>">Product Category</a></li>
                                     <li><a href="index3-horizontalmenu.html">Taxes</a></li>
                                 </ul>
                             </li>

@@ -24,18 +24,15 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">User Data</h4>
+                                <h4 class="header-title">Product Category Data</h4>
+                                <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalAdd"><span class="fa fa-plus"></span> Add</a><br><br>
                                 <div class="data-tables datatable-dark">
                                     <table id="myTable" class="text-center">
                                         <thead class="text-capitalize">
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Password</th>
-                                                <th>Address</th>
-                                                <th>Phone</th>
-                                                <th>Level</th>
+                                                <th>Product Category Name</th>
+                                                <th>Strategy</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -52,6 +49,47 @@
         </div>
         <!-- main content area end -->
 
+<!-- MODAL ADD -->
+<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header btn-success">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title" id="myModalLabel">Add Data</h3>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Category Name</label>
+                        <div class="col-xs-9">
+                            <input name="name_category_add" id="name_category1" class="form-control" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-9">
+                            <label class="control-label col-xs-3" >Strategy</label>
+                            <div class="col-xs-9">
+                                <select name="strategy_add" id="strategy1" class="form-control">
+                                    <option value="FIFO">First In First Out (FIFO)</option>
+                                    <option value="LIFO">Last In First Out (LIFO)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button class="btn btn-success" id="btn_simpan">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--END MODAL ADD-->
+
         <!-- MODAL EDIT -->
 <div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -63,46 +101,23 @@
             <form class="form-horizontal">
                 <div class="modal-body">
                     
-                    <input name="id_user_edit" id="id_user2" class="form-control" type="hidden" readonly>
+                    <input name="id_product_category_edit" id="id_product_category2" class="form-control" type="hidden" readonly>
                     <div class="form-group">
-                        <label class="control-label col-xs-3" >Name</label>
+                        <label class="control-label col-xs-3" >Category Name</label>
                         <div class="col-xs-9">
-                            <input name="name_edit" id="name2" class="form-control" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-xs-3" >Email</label>
-                        <div class="col-xs-9">
-                            <input name="email_edit" id="email2" class="form-control" type="email">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-xs-3" >Password</label>
-                        <div class="col-xs-9">
-                            <input name="password_edit" id="password2" class="form-control" type="password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-xs-3" >Address</label>
-                        <div class="col-xs-9">
-                            <textarea name="address_edit" id="address2" class="form-control" cols="30" rows="3"></textarea>
+                            <input name="name_category_edit" id="name_category2" class="form-control" type="text">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-xs-3" >Phone</label>
                         <div class="col-xs-9">
-                            <input name="phone_edit" id="phone2" class="form-control" type="number">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-xs-3" >Level</label>
-                        <div class="col-xs-9">
-                            <select name="level_edit" id="level2" class="form-control">
-                                <option value="1">Administrator</option>
-                                <option value="2">Manager</option>
-                            </select>
+                            <label class="control-label col-xs-3" >Strategy</label>
+                            <div class="col-xs-9">
+                                <select name="strategy_edit" id="strategy2" class="form-control">
+                                    <option value="FIFO">First In First Out (FIFO)</option>
+                                    <option value="LIFO">Last In First Out (LIFO)</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -361,7 +376,7 @@
         var rownumber = 0;
         var tableajax = $('#myTable').DataTable({
           responsive: true,
-            ajax: '<?php echo base_url("C_user/getAjax") ?>',
+            ajax: '<?php echo base_url("C_product_category/getAjax") ?>',
             columns: [
              { 
                 data: null,
@@ -370,43 +385,54 @@
                     return rownumber;
                 }
              },
-             { data: 'name'},
-             { data: 'email' },
-             { data: 'password' },
-             { data: 'address' },
-             { data: 'phone' },
-             { data: 'level' },
+             { data: 'name_category'},
+             { data: 'strategy' },
              {
               data: null,
               render: function ( data, type, row ) {
-                var ret = '<a href="javascript:;" class="btn btn-info btn-sm item_edit" data="'+row.id_user+'">Update</a>';
-                ret+= '<a href="javascript:;" class="btn btn-danger btn-sm item_hapus" data="'+row.id_user+'">Delete</a>';
+                var ret = '<a href="javascript:;" class="btn btn-info btn-sm item_edit" data="'+row.id_product_category+'">Update</a>';
+                ret+= '<a href="javascript:;" class="btn btn-danger btn-sm item_hapus" data="'+row.id_product_category+'">Delete</a>';
                 return ret;
                }
              }
              ]
         });
 
+        //Add Barang
+        $('#btn_simpan').on('click',function(){
+            var name_category=$('#name_category1').val();
+            var strategy=$('#strategy1').val();
+            $.ajax({
+                type : "POST",
+                url  : "<?php echo base_url('C_product_category/add')?>",
+                dataType : "JSON",
+                data : {name_category:name_category, strategy:strategy},
+                success: function(data){
+                    $('[name="name_category_add"]').val("");
+                    $('[name="strategy_add"]').val("");
+                    $('#ModalAdd').modal('hide');
+                    // tampil_data();
+                    rownumber=0;
+                    tableajax.ajax.reload();
+                }
+            });
+            return false;
+        });
        
-
         //GET UPDATE
         $('#show_data').on('click','.item_edit',function(){
-            var id_user=$(this).attr('data');
+            var id_product_category=$(this).attr('data');
             $.ajax({
                 type : "GET",
-                url  : "<?php echo base_url('C_user/where')?>",
+                url  : "<?php echo base_url('C_product_category/where')?>",
                 dataType : "JSON",
-                data : {id_user:id_user},
+                data : {id_product_category:id_product_category},
                 success: function(data){
-                    $.each(data,function(id_user, name, email, password, address, phone, level){
+                    $.each(data,function(id_product_category, name_category, strategy){
                         $('#ModalUpdate').modal('show');
-                        $('[name="id_user_edit"]').val(data.id_user);
-                        $('[name="name_edit"]').val(data.name);
-                        $('[name="email_edit"]').val(data.email);
-                        $('[name="password_edit"]').val(data.password);
-                        $('[name="address_edit"]').val(data.address);
-                        $('[name="phone_edit"]').val(data.phone);
-                        $('[name="level_edit"]').val(data.level);
+                        $('[name="id_product_category_edit"]').val(data.id_product_category);
+                        $('[name="name_category_edit"]').val(data.name_category);
+                        $('[name="strategy_edit"]').val(data.strategy);
                     });
                 }
             });
@@ -415,27 +441,19 @@
 
         //Update Barang
         $('#btn_update').on('click',function(){
-            var id_user=$('#id_user2').val();
-            var name=$('#name2').val();
-            var email=$('#email2').val();
-            var password=$('#password2').val();
-            var address=$('#address2').val();
-            var phone=$('#phone2').val();
-            var level=$('#level2').val();
+            var id_product_category=$('#id_product_category2').val();
+            var name_category=$('#name_category2').val();
+            var strategy=$('#strategy2').val();
             $.ajax({
                 type : "POST",
-                url  : "<?php echo base_url('C_user/update')?>",
+                url  : "<?php echo base_url('C_product_category/update')?>",
                 dataType : "JSON",
-                data : {id_user:id_user, name:name, email:email, password:password, address:address, phone:phone, level:level},
+                data : {id_product_category:id_product_category, name_category:name_category, strategy:strategy},
                 success: function(data){
-                    $('[name="id_user_edit"]').val("");
-                    $('[name="name_edit"]').val("");
-                    $('[name="email_edit"]').val("");
-                    $('[name="password_edit"]').val("");
-                    $('[name="address_edit"]').val("");
-                    $('[name="phone_edit"]').val("");
-                    $('[name="level_edit"]').val("");
-                    $('#ModalUpdate').modal('hide');
+                    $('[name="id_product_category_edit"]').val("");
+                    $('[name="name_category_edit"]').val("");
+                    $('[name="strategy_edit"]').val("");
+                    $('#ModalAdd').modal('hide');
                     // tampil_data();
                     rownumber=0;
                     tableajax.ajax.reload();
@@ -447,19 +465,19 @@
 
         //GET HAPUS
         $('#show_data').on('click','.item_hapus',function(){
-            var id_user=$(this).attr('data');
+            var id_product_category=$(this).attr('data');
             $('#ModalDelete').modal('show');
-            $('[name="kode"]').val(id_user);
+            $('[name="kode"]').val(id_product_category);
         });
 
         //Hapus
         $('#btn_hapus').on('click',function(){
-            var id_user=$('#textkode').val();
+            var id_product_category=$('#textkode').val();
             $.ajax({
                 type : "POST",
-                url  : "<?php echo base_url('C_user/delete')?>",
+                url  : "<?php echo base_url('C_product_category/delete')?>",
                 dataType : "JSON",
-                data : {id_user: id_user},
+                data : {id_product_category: id_product_category},
                 success: function(data){
                     $('#ModalDelete').modal('hide');
                     // tampil_data();

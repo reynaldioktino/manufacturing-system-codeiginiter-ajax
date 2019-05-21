@@ -23,12 +23,8 @@ class M_product_category extends CI_Model{
 			foreach ($query->result() as $value) {
 				$data=array(
 					'id_product_category' => $value->id_product_category,
-					'name' => $value->name,
-					'email' => $value->email,
-					'password' => $value->password,
-					'address' => $value->address,
-					'phone' => $value->phone,
-					'level' => $value->level
+					'name_category' => $value->name_category,
+					'strategy' => $value->strategy
 				);
 			}
 		}

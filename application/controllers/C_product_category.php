@@ -24,30 +24,21 @@ class C_product_category extends CI_Controller {
         echo json_encode($data);
     }
 
-	public function add() {
+	public function add(){
 		$dat = array(
 			'id_product_category'	=>	$this->input->post(''),
-			'name'	=>	$this->input->post('name'),
-			'email'	=>	$this->input->post('email'),
-			'password'	=>	md5($this->input->post('password')),
-			'address'	=>	$this->input->post('address'),
-			'phone'	=>	$this->input->post('phone'),
-			'level'	=>	$this->input->post('level')
+			'name_category'	=>	$this->input->post('name_category'),
+			'strategy'	=>	$this->input->post('strategy'),
 		);
-		$data = $this->M_product_category->insert($dat);
-		$this->session->set_flashdata('berhasil','Data Berhasil Ditambahkan'); 
-		redirect('C_admin/addproduct_category');
+		$data=$this->M_product_category->insert($dat);
+		echo json_encode($data);
 	}
 
 	public function update(){
 		$dat=array(
 			'id_product_category'=>$this->input->post('id_product_category'),
-			'name'=>$this->input->post('name'),
-			'email'=>$this->input->post('email'),
-			'password'=>$this->input->post('password'),
-			'address'=>$this->input->post('address'),
-			'phone'=>$this->input->post('phone'),
-			'level'=>$this->input->post('level')
+			'name_category'=>$this->input->post('name_category'),
+			'strategy'=>$this->input->post('strategy')
 		);
 		$where=$this->input->post('id_product_category');
 		$data=$this->M_product_category->update($dat, $where);
