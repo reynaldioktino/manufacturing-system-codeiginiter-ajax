@@ -1,4 +1,7 @@
 <?php $this->load->view('main/header'); ?>
+</head>
+
+<body>
     <div id="preloader">
         <div class="loader"></div>
     </div>
