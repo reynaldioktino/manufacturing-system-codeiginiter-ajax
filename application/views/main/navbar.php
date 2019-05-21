@@ -17,7 +17,7 @@
                                 <ul class="collapse">
                                     <li><a href="index.html">Product Data</a></li>
                                     <li><a href="<?php echo base_url('C_admin/productcategory'); ?>">Product Category</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Taxes</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/taxes'); ?>">Taxes</a></li>
                                 </ul>
                             </li>
                             <li>

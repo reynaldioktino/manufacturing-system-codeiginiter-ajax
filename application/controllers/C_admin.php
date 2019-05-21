@@ -31,4 +31,8 @@ class C_admin extends CI_Controller {
 		$this->load->view('menu/productcategory');
 	}
 
+	public function taxes() {
+		$this->load->view('menu/taxes');
+	}
+
 }

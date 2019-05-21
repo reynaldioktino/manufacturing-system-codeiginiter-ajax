@@ -24,15 +24,15 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Product Category Data</h4>
+                                <h4 class="header-title">Taxes Data</h4>
                                 <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalAdd"><span class="fa fa-plus"></span> Add</a><br><br>
                                 <div class="data-tables datatable-dark">
                                     <table id="myTable" class="text-center">
                                         <thead class="text-capitalize">
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Product Category Name</th>
-                                                <th>Strategy</th>
+                                                <th>Tax Name</th>
+                                                <th>Amount</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -61,20 +61,17 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label class="control-label col-xs-3" >Category Name</label>
+                        <label class="control-label col-xs-3" >Taxes Name</label>
                         <div class="col-xs-9">
-                            <input name="name_category_add" id="name_category1" class="form-control" type="text">
+                            <input name="tax_name_add" id="tax_name1" class="form-control" type="text">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-9">
-                            <label class="control-label col-xs-3" >Strategy</label>
+                            <label class="control-label col-xs-3" >Amount</label>
                             <div class="col-xs-9">
-                                <select name="strategy_add" id="strategy1" class="form-control">
-                                    <option value="FIFO">First In First Out (FIFO)</option>
-                                    <option value="LIFO">Last In First Out (LIFO)</option>
-                                </select>
+                                <input name="amount_add" id="amount1" class="form-control" type="number">
                             </div>
                         </div>
                     </div>
@@ -101,22 +98,19 @@
             <form class="form-horizontal">
                 <div class="modal-body">
                     
-                    <input name="id_product_category_edit" id="id_product_category2" class="form-control" type="hidden" readonly>
+                    <input name="id_tax_edit" id="id_tax2" class="form-control" type="hidden" readonly>
                     <div class="form-group">
-                        <label class="control-label col-xs-3" >Category Name</label>
+                        <label class="control-label col-xs-3" >Taxes Name</label>
                         <div class="col-xs-9">
-                            <input name="name_category_edit" id="name_category2" class="form-control" type="text">
+                            <input name="tax_name_edit" id="tax_name2" class="form-control" type="text">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-9">
-                            <label class="control-label col-xs-3" >Strategy</label>
+                            <label class="control-label col-xs-3" >Amount</label>
                             <div class="col-xs-9">
-                                <select name="strategy_edit" id="strategy2" class="form-control">
-                                    <option value="FIFO">First In First Out (FIFO)</option>
-                                    <option value="LIFO">Last In First Out (LIFO)</option>
-                                </select>
+                                <input name="amount_edit" id="amount2" class="form-control" type="number">
                             </div>
                         </div>
                     </div>
@@ -376,7 +370,7 @@
         var rownumber = 0;
         var tableajax = $('#myTable').DataTable({
           responsive: true,
-            ajax: '<?php echo base_url("C_product_category/getAjax") ?>',
+            ajax: '<?php echo base_url("C_taxes/getAjax") ?>',
             columns: [
              { 
                 data: null,
@@ -385,13 +379,13 @@
                     return rownumber;
                 }
              },
-             { data: 'name_category'},
-             { data: 'strategy' },
+             { data: 'tax_name'},
+             { data: 'amount' },
              {
               data: null,
               render: function ( data, type, row ) {
-                var ret = '<a href="javascript:;" class="btn btn-info btn-sm item_edit" data="'+row.id_product_category+'">Update</a>';
-                ret+= '<a href="javascript:;" class="btn btn-danger btn-sm item_hapus" data="'+row.id_product_category+'">Delete</a>';
+                var ret = '<a href="javascript:;" class="btn btn-info btn-sm item_edit" data="'+row.id_tax+'">Update</a>';
+                ret+= '<a href="javascript:;" class="btn btn-danger btn-sm item_hapus" data="'+row.id_tax+'">Delete</a>';
                 return ret;
                }
              }
@@ -400,16 +394,16 @@
 
         //Add Barang
         $('#btn_simpan').on('click',function(){
-            var name_category=$('#name_category1').val();
-            var strategy=$('#strategy1').val();
+            var tax_name=$('#tax_name1').val();
+            var amount=$('#amount1').val();
             $.ajax({
                 type : "POST",
-                url  : "<?php echo base_url('C_product_category/add')?>",
+                url  : "<?php echo base_url('C_taxes/add')?>",
                 dataType : "JSON",
-                data : {name_category:name_category, strategy:strategy},
+                data : {tax_name:tax_name, amount:amount},
                 success: function(data){
-                    $('[name="name_category_add"]').val("");
-                    $('[name="strategy_add"]').val("");
+                    $('[name="tax_name_add"]').val("");
+                    $('[name="amount_add"]').val("");
                     $('#ModalAdd').modal('hide');
                     // tampil_data();
                     rownumber=0;
@@ -421,18 +415,18 @@
        
         //GET UPDATE
         $('#show_data').on('click','.item_edit',function(){
-            var id_product_category=$(this).attr('data');
+            var id_tax=$(this).attr('data');
             $.ajax({
                 type : "GET",
-                url  : "<?php echo base_url('C_product_category/where')?>",
+                url  : "<?php echo base_url('C_taxes/where')?>",
                 dataType : "JSON",
-                data : {id_product_category:id_product_category},
+                data : {id_tax:id_tax},
                 success: function(data){
-                    $.each(data,function(id_product_category, name_category, strategy){
+                    $.each(data,function(id_tax, tax_name, amount){
                         $('#ModalUpdate').modal('show');
-                        $('[name="id_product_category_edit"]').val(data.id_product_category);
-                        $('[name="name_category_edit"]').val(data.name_category);
-                        $('[name="strategy_edit"]').val(data.strategy);
+                        $('[name="id_tax_edit"]').val(data.id_tax);
+                        $('[name="tax_name_edit"]').val(data.tax_name);
+                        $('[name="amount_edit"]').val(data.amount);
                     });
                 }
             });
@@ -441,18 +435,18 @@
 
         //Update Barang
         $('#btn_update').on('click',function(){
-            var id_product_category=$('#id_product_category2').val();
-            var name_category=$('#name_category2').val();
-            var strategy=$('#strategy2').val();
+            var id_tax=$('#id_tax2').val();
+            var tax_name=$('#tax_name2').val();
+            var amount=$('#amount2').val();
             $.ajax({
                 type : "POST",
-                url  : "<?php echo base_url('C_product_category/update')?>",
+                url  : "<?php echo base_url('C_taxes/update')?>",
                 dataType : "JSON",
-                data : {id_product_category:id_product_category, name_category:name_category, strategy:strategy},
+                data : {id_tax:id_tax, tax_name:tax_name, amount:amount},
                 success: function(data){
-                    $('[name="id_product_category_edit"]').val("");
-                    $('[name="name_category_edit"]').val("");
-                    $('[name="strategy_edit"]').val("");
+                    $('[name="id_tax_edit"]').val("");
+                    $('[name="tax_name_edit"]').val("");
+                    $('[name="amount_edit"]').val("");
                     $('#ModalUpdate').modal('hide');
                     // tampil_data();
                     rownumber=0;
@@ -465,19 +459,19 @@
 
         //GET HAPUS
         $('#show_data').on('click','.item_hapus',function(){
-            var id_product_category=$(this).attr('data');
+            var id_tax=$(this).attr('data');
             $('#ModalDelete').modal('show');
-            $('[name="kode"]').val(id_product_category);
+            $('[name="kode"]').val(id_tax);
         });
 
         //Hapus
         $('#btn_hapus').on('click',function(){
-            var id_product_category=$('#textkode').val();
+            var id_tax=$('#textkode').val();
             $.ajax({
                 type : "POST",
-                url  : "<?php echo base_url('C_product_category/delete')?>",
+                url  : "<?php echo base_url('C_taxes/delete')?>",
                 dataType : "JSON",
-                data : {id_product_category: id_product_category},
+                data : {id_tax: id_tax},
                 success: function(data){
                     $('#ModalDelete').modal('hide');
                     // tampil_data();
