@@ -2,7 +2,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
+                    <a href="index.html"><img src="<?php echo base_url(); ?>assets/images/icon/logo.png" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -10,7 +10,7 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard active"></i><span>dashboard</span></a>
+                                <a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager'); }?>" aria-expanded="true"><i class="ti-dashboard active"></i><span>dashboard</span></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-grid3"></i><span>Product</span></a>
@@ -32,13 +32,15 @@
                                     <li><a href="button.html">Done Data</a></li>
                                 </ul>
                             </li>
+                            <?php if($this->session->userdata('level') == "1") : ?>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i><span>User Management</span></a>
                                 <ul class="collapse">
-                                    <li><a href="fontawesome.html">Add User</a></li>
-                                    <li><a href="themify.html">User Data</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/adduser') ?>">Add User</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/user') ?>">User Data</a></li>
                                 </ul>
                             </li>
+                        <?php endif; ?>
                         </ul>
                     </nav>
                 </div>
@@ -135,7 +137,7 @@
                                     <div class="nofity-list">
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img1.jpg" alt="image">
+                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img1.jpg" alt="image">
                                             </div>
                                             <div class="notify-text">
                                                 <p>Aglae Mayer</p>
@@ -145,7 +147,7 @@
                                         </a>
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img2.jpg" alt="image">
+                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img2.jpg" alt="image">
                                             </div>
                                             <div class="notify-text">
                                                 <p>Aglae Mayer</p>
@@ -155,7 +157,7 @@
                                         </a>
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img3.jpg" alt="image">
+                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img3.jpg" alt="image">
                                             </div>
                                             <div class="notify-text">
                                                 <p>Aglae Mayer</p>
@@ -165,7 +167,7 @@
                                         </a>
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img4.jpg" alt="image">
+                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img4.jpg" alt="image">
                                             </div>
                                             <div class="notify-text">
                                                 <p>Aglae Mayer</p>
@@ -175,7 +177,7 @@
                                         </a>
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img2.jpg" alt="image">
+                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img2.jpg" alt="image">
                                             </div>
                                             <div class="notify-text">
                                                 <p>Aglae Mayer</p>
@@ -185,7 +187,7 @@
                                         </a>
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img1.jpg" alt="image">
+                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img1.jpg" alt="image">
                                             </div>
                                             <div class="notify-text">
                                                 <p>Aglae Mayer</p>
@@ -195,7 +197,7 @@
                                         </a>
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img3.jpg" alt="image">
+                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img3.jpg" alt="image">
                                             </div>
                                             <div class="notify-text">
                                                 <p>Aglae Mayer</p>
@@ -228,7 +230,7 @@
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
+                            <img class="avatar user-thumb" src="<?php echo base_url(); ?>assets/images/author/avatar.png" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Administrator <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Message</a>
