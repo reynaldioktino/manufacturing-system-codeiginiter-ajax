@@ -8,6 +8,12 @@ class M_product_category extends CI_Model{
 		parent::__construct();
 	}
 
+	public function listproduct_category()
+	{
+		$query=$this->db->query("SELECT * FROM product_category");
+		return $query->result();
+	}
+
 	public function getproduct_category()
 	{
 		$this->db->select('*');

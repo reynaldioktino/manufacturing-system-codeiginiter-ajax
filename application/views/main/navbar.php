@@ -15,13 +15,13 @@
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-grid3"></i><span>Product</span></a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">Product Data</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/product'); ?>">Product Data</a></li>
                                     <li><a href="<?php echo base_url('C_admin/productcategory'); ?>">Product Category</a></li>
                                     <li><a href="<?php echo base_url('C_admin/taxes'); ?>">Taxes</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i><span>Bill Of Material</span></a>
+                                <a href="<?php echo base_url('C_admin/bom'); ?>" aria-expanded="true"><i class="ti-layers-alt"></i><span>Bill Of Material</span></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-package"></i><span>Manufacturing</span></a>

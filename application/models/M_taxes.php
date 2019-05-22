@@ -8,6 +8,12 @@ class M_taxes extends CI_Model{
 		parent::__construct();
 	}
 
+	public function listtaxes()
+	{
+		$query=$this->db->query("SELECT * FROM taxes");
+		return $query->result();
+	}
+
 	public function gettaxes()
 	{
 		$this->db->select('*');
