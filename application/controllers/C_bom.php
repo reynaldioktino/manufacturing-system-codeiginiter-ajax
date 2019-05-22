@@ -6,6 +6,7 @@ class C_bom extends CI_Controller {
 	function __construct(){ 
 		parent::__construct();
 		$this->load->model('M_bom');
+		$this->load->model('M_product');
 
 		if($this->session->userdata('level') != "1") {  
 			redirect('');  
@@ -54,7 +55,49 @@ class C_bom extends CI_Controller {
 	}
 
 	public function detail() {
-		$this->load->view('menu/detailbom');
+		$id = $this->uri->segment(3);
+		$data['product']=$this->M_product->listproduct();
+		$data['product_bom'] = $this->M_bom->product_bom($id);
+		$this->load->view('menu/detailbom', $data);
+	}
+
+	public function getAjaxDetail()
+	{
+		$data['data'] = $this->M_bom->getbomdetail();
+		echo json_encode($data);
+	}
+
+	public function adddetail(){
+		$dat = array(
+			'id_detail_bom'	=>	$this->input->post(''),
+			'id_bom'	=>	$this->input->post('id_bom'),
+			'id_product'	=>	$this->input->post('id_product'),
+			'quantity'	=>	$this->input->post('quantity')
+		);
+		$data=$this->M_bom->insertdetail($dat);
+		echo json_encode($data);
+	}
+
+	public function deletedetail(){
+		$where=$this->input->post('id_detail_bom');
+		$data=$this->M_bom->deletedetail($where);
+		echo json_encode($data);
+	}
+
+	public function wheredetail(){
+        $id=$this->input->get('id_detail_bom');
+        $data=$this->M_bom->getdetailbomWhereId($id);
+        echo json_encode($data);
+    }
+
+    public function updatedetail(){
+		$dat=array(
+			'id_detail_bom'=>$this->input->post('id_detail_bom'),
+			'quantity'=>$this->input->post('quantity')
+		);
+		$where=$this->input->post('id_detail_bom');
+		$data=$this->M_bom->updatedetail($dat, $where);
+		echo json_encode($data);
 	}
 
 }

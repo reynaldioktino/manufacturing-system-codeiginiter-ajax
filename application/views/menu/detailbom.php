@@ -20,20 +20,30 @@
         <?php $this->load->view('main/navbar'); ?>
             <div class="main-content-inner">
                 <div class="row">
+                    <div class="col-lg-4 col-md-6 mt-5">
+                        <div class="card card-bordered">
+                            <img class="card-img-top img-fluid" src="<?php echo base_url(); ?>foto/<?php echo $product_bom[0]->fp; ?>" alt="image">
+                            <div class="card-body">
+                                <h3 class="title">Product : <span class="badge badge-primary"><?php echo $product_bom[0]->pn; ?></span></h3>
+                                <p class="card-text">Quantity : <?php echo $product_bom[0]->quantity; ?><br>BoM Type : <?php echo $product_bom[0]->bom_type; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <!-- Dark table start -->
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Component </h4>
-                                <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalAdd"><span class="fa fa-plus"></span> Add</a><br><br>
+                                <h4 class="header-title">Component <?php echo $product_bom[0]->pn; ?></h4>
+                                <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalAdd"><span class="fa fa-plus"></span> Component</a><br><br>
                                 <div class="data-tables datatable-dark">
                                     <table id="myTable" class="text-center">
                                         <thead class="text-capitalize">
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Product</th>
+                                                <th>Product Component</th>
                                                 <th>Quantity</th>
-                                                <th>BoM Type</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -56,14 +66,23 @@
         <div class="modal-content">
             <div class="modal-header btn-success">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title" id="myModalLabel">Add Data</h3>
+                <h3 class="modal-title" id="myModalLabel">Component</h3>
             </div>
             <form class="form-horizontal">
                 <div class="modal-body">
+                    <input type="hidden" name="id_bom_add" id="id_bom1" value="<?php echo $product_bom[0]->id_bom; ?>">
+                    <div class="form-group">
+                        <div class="col-xs-9">
+                            <label class="control-label col-xs-3" >Product</label>
+                            <div class="col-xs-9">
+                                <input name="product_add" id="product1" class="form-control" type="text" value="<?php echo $product_bom[0]->pn; ?>" readonly>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="col-xs-9">
-                            <label for="id_product_category" class="control-label col-xs-3">Product</label>
+                            <label for="id_product_category" class="control-label col-xs-3">Component</label>
                             <div class="col-xs-9">
                                 <select class="custom-select" name="id_product_add" id="id_product1">
                                     <?php foreach ($product as $key => $value): ?>
@@ -83,17 +102,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-xs-9">
-                            <label class="control-label col-xs-3" >BoM Type</label>
-                            <div class="col-xs-9">
-                                <select name="bom_type_add" id="bom_type1" class="form-control">
-                                    <option value="Manufacture this product">Manufacture this product</option>
-                                    <option value="Kit">Kit</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="modal-footer">
@@ -117,15 +125,11 @@
             <form class="form-horizontal">
                 <div class="modal-body">
                     
-                    <input name="id_bom_edit" id="id_bom2" class="form-control" type="hidden" readonly>
+                    <input name="id_detail_bom_edit" id="id_detail_bom2" class="form-control" type="hidden">
                     <div class="form-group">
                         <label for="id_product_category" class="control-label col-xs-3">Product</label>
                         <div class="col-xs-9">
-                            <select class="custom-select" name="id_product_edit" id="id_product2">
-                                <?php foreach ($product as $key => $value): ?>
-                                    <option value="<?php echo $value->id_product; ?>"><?php echo $value->product_name; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <input name="id_product_edit" id="id_product2" class="form-control" type="text" readonly="">
                         </div>
                     </div>
 
@@ -134,18 +138,6 @@
                             <label class="control-label col-xs-3" >Quantity</label>
                             <div class="col-xs-9">
                                 <input name="quantity_edit" id="quantity2" class="form-control" type="number">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-9">
-                            <label class="control-label col-xs-3" >BoM Type</label>
-                            <div class="col-xs-9">
-                                <select name="bom_type_edit" id="bom_type2" class="form-control">
-                                    <option value="Manufacture this product">Manufacture this product</option>
-                                    <option value="Kit">Kit</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -405,7 +397,7 @@
         var rownumber = 0;
         var tableajax = $('#myTable').DataTable({
           responsive: true,
-            ajax: '<?php echo base_url("C_bom/getAjax") ?>',
+            ajax: '<?php echo base_url("C_bom/getAjaxDetail") ?>',
             columns: [
              { 
                 data: null,
@@ -416,13 +408,11 @@
              },
              { data: 'pn'},
              { data: 'quantity' },
-             { data: 'bom_type' },
              {
               data: null,
               render: function ( data, type, row ) {
-                var ret = '<a href="javascript:;" class="btn btn-info btn-sm item_edit" data="'+row.id_bom+'">Update</a>';
-                ret+= '<a href="javascript:;" class="btn btn-danger btn-sm item_hapus" data="'+row.id_bom+'">Delete</a>';
-                ret+= '<a href="<?php echo base_url()?>C_bom/detail/'+row.id_bom+'" class="btn btn-warning btn-sm text-white">Detail</a>';
+                var ret = '<a href="javascript:;" class="btn btn-info btn-sm item_edit" data="'+row.id_detail_bom+'">Stok</a>';
+                ret+= '<a href="javascript:;" class="btn btn-danger btn-sm item_hapus" data="'+row.id_detail_bom+'">Delete</a>';
                 return ret;
                }
              }
@@ -431,18 +421,18 @@
 
         //Add Barang
         $('#btn_simpan').on('click',function(){
+            var id_bom=$('#id_bom1').val();
             var id_product=$('#id_product1').val();
             var quantity=$('#quantity1').val();
-            var bom_type=$('#bom_type1').val();
             $.ajax({
                 type : "POST",
-                url  : "<?php echo base_url('C_bom/add')?>",
+                url  : "<?php echo base_url('C_bom/adddetail')?>",
                 dataType : "JSON",
-                data : {id_product:id_product, quantity:quantity, bom_type:bom_type},
+                data : {id_bom:id_bom, id_product:id_product, quantity:quantity},
                 success: function(data){
                     $('[name="id_product_add"]').val("");
                     $('[name="quantity_add"]').val("");
-                    $('[name="bom_type_add"]').val("");
+                    $('[name="id_bom_add"]').val("");
                     $('#ModalAdd').modal('hide');
                     // tampil_data();
                     rownumber=0;
@@ -454,19 +444,18 @@
        
         //GET UPDATE
         $('#show_data').on('click','.item_edit',function(){
-            var id_bom=$(this).attr('data');
+            var id_detail_bom=$(this).attr('data');
             $.ajax({
                 type : "GET",
-                url  : "<?php echo base_url('C_bom/where')?>",
+                url  : "<?php echo base_url('C_bom/wheredetail')?>",
                 dataType : "JSON",
-                data : {id_bom:id_bom},
+                data : {id_detail_bom:id_detail_bom},
                 success: function(data){
-                    $.each(data,function(id_bom, id_product, quantity, bom_type){
+                    $.each(data,function(id_detail_bom, pn, quantity){
                         $('#ModalUpdate').modal('show');
-                        $('[name="id_bom_edit"]').val(data.id_bom);
-                        $('[name="id_product_edit"]').val(data.id_product);
+                        $('[name="id_detail_bom_edit"]').val(data.id_detail_bom);
+                        $('[name="id_product_edit"]').val(data.pn);
                         $('[name="quantity_edit"]').val(data.quantity);
-                        $('[name="bom_type_edit"]').val(data.bom_type);
                     });
                 }
             });
@@ -475,20 +464,17 @@
 
         //Update Barang
         $('#btn_update').on('click',function(){
-            var id_bom=$('#id_bom2').val();
-            var id_product=$('#id_product2').val();
+            var id_detail_bom=$('#id_detail_bom2').val();
             var quantity=$('#quantity2').val();
-            var bom_type=$('#bom_type2').val();
             $.ajax({
                 type : "POST",
-                url  : "<?php echo base_url('C_bom/update')?>",
+                url  : "<?php echo base_url('C_bom/updatedetail')?>",
                 dataType : "JSON",
-                data : {id_bom:id_bom, id_product:id_product, quantity:quantity, bom_type:bom_type},
+                data : {id_detail_bom:id_detail_bom, quantity:quantity},
                 success: function(data){
                     $('[name="id_bom_edit"]').val("");
                     $('[name="id_product_edit"]').val("");
                     $('[name="quantity_edit"]').val("");
-                    $('[name="bom_type_edit"]').val("");
                     $('#ModalUpdate').modal('hide');
                     // tampil_data();
                     rownumber=0;
@@ -501,19 +487,19 @@
 
         //GET HAPUS
         $('#show_data').on('click','.item_hapus',function(){
-            var id_bom=$(this).attr('data');
+            var id_detail_bom=$(this).attr('data');
             $('#ModalDelete').modal('show');
-            $('[name="kode"]').val(id_bom);
+            $('[name="kode"]').val(id_detail_bom);
         });
 
         //Hapus
         $('#btn_hapus').on('click',function(){
-            var id_bom=$('#textkode').val();
+            var id_detail_bom=$('#textkode').val();
             $.ajax({
                 type : "POST",
-                url  : "<?php echo base_url('C_bom/delete')?>",
+                url  : "<?php echo base_url('C_bom/deletedetail')?>",
                 dataType : "JSON",
-                data : {id_bom: id_bom},
+                data : {id_detail_bom: id_detail_bom},
                 success: function(data){
                     $('#ModalDelete').modal('hide');
                     // tampil_data();

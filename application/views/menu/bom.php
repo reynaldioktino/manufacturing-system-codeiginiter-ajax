@@ -87,7 +87,7 @@
                         <div class="col-xs-9">
                             <label class="control-label col-xs-3" >BoM Type</label>
                             <div class="col-xs-9">
-                                <select name="bom_type_add" id="bom_type1" class="form-control">
+                                <select name="bom_type_add" id="bom_type1" class="custom-select">
                                     <option value="Manufacture this product">Manufacture this product</option>
                                     <option value="Kit">Kit</option>
                                 </select>
