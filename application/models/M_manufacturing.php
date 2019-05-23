@@ -35,17 +35,14 @@ class M_manufacturing extends CI_Model{
 
 	public function getmanufacturingWhereId($where)
 	{
-		$query=$this->db->query("SELECT * FROM manufacturing WHERE id_manufacturing='$where'");
+		$query=$this->db->query("SELECT manufacturing.*, product.product_name as pn FROM manufacturing INNER JOIN product ON product.id_product=manufacturing.id_product WHERE id_manufacturing='$where'");
 		if($query->num_rows()>0){
 			foreach ($query->result() as $value) {
 				$data=array(
 					'id_manufacturing' => $value->id_manufacturing,
-					'name' => $value->name,
-					'email' => $value->email,
-					'password' => $value->password,
-					'address' => $value->address,
-					'phone' => $value->phone,
-					'level' => $value->level
+					'pn' => $value->pn,
+					'quantity' => $value->quantity,
+					'deadline_start' => $value->deadline_start
 				);
 			}
 		}

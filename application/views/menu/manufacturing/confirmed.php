@@ -119,15 +119,11 @@
             <form class="form-horizontal">
                 <div class="modal-body">
                     
-                    <input name="id_bom_edit" id="id_bom2" class="form-control" type="hidden" readonly>
+                    <input name="id_manufacturing_edit" id="id_manufacturing2" class="form-control" type="hidden" readonly>
                     <div class="form-group">
                         <label for="id_product_category" class="control-label col-xs-3">Product</label>
                         <div class="col-xs-9">
-                            <select class="custom-select" name="id_product_edit" id="id_product2">
-                                <?php foreach ($product as $key => $value): ?>
-                                    <option value="<?php echo $value->id_product; ?>"><?php echo $value->product_name; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <input name="id_product_edit" id="id_product2" class="form-control" type="text" readonly="">
                         </div>
                     </div>
 
@@ -142,12 +138,9 @@
 
                     <div class="form-group">
                         <div class="col-xs-9">
-                            <label class="control-label col-xs-3" >BoM Type</label>
+                            <label class="control-label col-xs-3" >Deadline Start</label>
                             <div class="col-xs-9">
-                                <select name="bom_type_edit" id="bom_type2" class="form-control">
-                                    <option value="Manufacture this product">Manufacture this product</option>
-                                    <option value="Kit">Kit</option>
-                                </select>
+                                <input name="deadline_start_edit" id="deadline_start2" class="form-control" type="date">
                             </div>
                         </div>
                     </div>
@@ -427,34 +420,11 @@
               render: function ( data, type, row ) {
                 var ret = '<a href="javascript:;" class="btn btn-info btn-sm item_edit" data="'+row.id_manufacturing+'">Update</a>';
                 ret+= '<a href="javascript:;" class="btn btn-danger btn-sm item_hapus" data="'+row.id_manufacturing+'">Delete</a>';
-                ret+= '<a href="<?php echo base_url()?>C_manufacturing/detail/'+row.id_manufacturing+'" class="btn btn-warning btn-sm text-white">Check Stok</a>';
+                ret+= '<a href="<?php echo base_url()?>C_manufacturing/checkstok/'+row.id_manufacturing+'" class="btn btn-warning btn-sm text-white">Check Stok</a>';
                 return ret;
                }
              }
              ]
-        });
-
-        //Add Barang
-        $('#btn_simpan').on('click',function(){
-            var id_product=$('#id_product1').val();
-            var quantity=$('#quantity1').val();
-            var manufacturing_type=$('#manufacturing_type1').val();
-            $.ajax({
-                type : "POST",
-                url  : "<?php echo base_url('C_manufacturing/add')?>",
-                dataType : "JSON",
-                data : {id_product:id_product, quantity:quantity, manufacturing_type:manufacturing_type},
-                success: function(data){
-                    $('[name="id_product_add"]').val("");
-                    $('[name="quantity_add"]').val("");
-                    $('[name="manufacturing_type_add"]').val("");
-                    $('#ModalAdd').modal('hide');
-                    // tampil_data();
-                    rownumber=0;
-                    tableajax.ajax.reload();
-                }
-            });
-            return false;
         });
        
         //GET UPDATE
@@ -466,12 +436,12 @@
                 dataType : "JSON",
                 data : {id_manufacturing:id_manufacturing},
                 success: function(data){
-                    $.each(data,function(id_manufacturing, id_product, quantity, manufacturing_type){
+                    $.each(data,function(id_manufacturing, pn, quantity, deadline_start){
                         $('#ModalUpdate').modal('show');
                         $('[name="id_manufacturing_edit"]').val(data.id_manufacturing);
-                        $('[name="id_product_edit"]').val(data.id_product);
+                        $('[name="id_product_edit"]').val(data.pn);
                         $('[name="quantity_edit"]').val(data.quantity);
-                        $('[name="manufacturing_type_edit"]').val(data.manufacturing_type);
+                        $('[name="deadline_start_edit"]').val(data.deadline_start);
                     });
                 }
             });
