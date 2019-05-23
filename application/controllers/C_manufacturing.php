@@ -6,6 +6,8 @@ class C_manufacturing extends CI_Controller {
 	function __construct(){ 
 		parent::__construct();
 		$this->load->model('M_manufacturing');
+		$this->load->model('M_bom');
+		$this->load->model('M_product');
 
 		if($this->session->userdata('level') != "1") {  
 			redirect('');  
@@ -63,6 +65,21 @@ class C_manufacturing extends CI_Controller {
 		$where=$this->input->post('id_manufacturing');
 		$data=$this->M_manufacturing->delete($where);
 		echo json_encode($data);
+	}
+
+	public function checkstok($id_manufacturing) {
+		$data['manufacturing'] = $this->M_manufacturing->getmanufacturingid($id_manufacturing);
+		$manufacturing_array = $this->M_manufacturing->getmanufacturingid($id_manufacturing);
+		foreach($manufacturing_array as $manufacturing){
+		    $id_bom = $manufacturing->id_bom;
+		    $id_product = $manufacturing->id_product;
+		}
+		$data['detail_bom'] = $this->M_bom->getdetailbomid($id_bom);
+		$this->load->view('menu/manufacturing/checkstok', $data);
+	}
+
+	public function produce() {
+
 	}
 
 }

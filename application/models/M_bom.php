@@ -102,5 +102,14 @@ class M_bom extends CI_Model{
 		$this->db->update('detail_bom', $data);
 	}
 	
+
+	public function getdetailbomid($id_bom) {
+		$this->db->select('detail_bom.*, product.product_name as pn, product.stok as sp');
+        $this->db->from('detail_bom');
+        $this->db->join('product','product.id_product=detail_bom.id_product');
+        $this->db->where('id_bom', $id_bom);
+        $query = $this->db->get();
+        return $query->result();
+	}
 }
 ?>
