@@ -10,7 +10,7 @@ class M_bom extends CI_Model{
 
 	public function listbom()
 	{
-		$query=$this->db->query("SELECT * FROM bom");
+		$query=$this->db->query("SELECT bom.*, product.product_name as pn FROM bom INNER JOIN product on product.id_product=bom.id_product");
 		return $query->result();
 	}
 

@@ -8,6 +8,8 @@ class C_admin extends CI_Controller {
 		$this->load->model('M_product_category');
 		$this->load->model('M_taxes');
 		$this->load->model('M_product');
+		$this->load->model('M_bom');
+		$this->load->model('M_user');
 		// $this->load->library(array('session'));
 		// $this->load->library('user_agent'); //deklarasi mengaktifkan library pagination
 		if($this->session->userdata('level') != "1") {  
@@ -46,6 +48,17 @@ class C_admin extends CI_Controller {
 	public function bom() {
 		$data['product']=$this->M_product->listproduct();
 		$this->load->view('menu/bom', $data);
+	}
+
+	public function createmanufacturing() {
+		$data['product']=$this->M_product->listproduct();
+		$data['bom']=$this->M_bom->listbom();
+		$data['user']=$this->M_user->listuser();
+		$this->load->view('menu/manufacturing/create', $data);
+	}
+
+	public function confirmed() {
+		$this->load->view('menu/manufacturing/confirmed');
 	}
 
 }

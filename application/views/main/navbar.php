@@ -26,10 +26,11 @@
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-package"></i><span>Manufacturing</span></a>
                                 <ul class="collapse">
-                                    <li><a href="accordion.html">Manufacturing</a></li>
-                                    <li><a href="alert.html">Confirmed Data</a></li>
-                                    <li><a href="badge.html">In Progress Data</a></li>
-                                    <li><a href="button.html">Done Data</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/createmanufacturing'); ?>">Create Manfucturing</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/manufacturing'); ?>">Manufacturing Data</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/confirmed'); ?>">Confirmed Data</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/inprogress'); ?>">In Progress Data</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/done'); ?>">Done Data</a></li>
                                 </ul>
                             </li>
                             <?php if($this->session->userdata('level') == "1") : ?>

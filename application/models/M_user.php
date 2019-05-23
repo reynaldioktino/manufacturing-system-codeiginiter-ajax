@@ -8,6 +8,12 @@ class M_user extends CI_Model{
 		parent::__construct();
 	}
 
+	public function listuser()
+	{
+		$query=$this->db->query("SELECT * FROM user");
+		return $query->result();
+	}
+
 	public function getuser()
 	{
 		$this->db->select('*');
