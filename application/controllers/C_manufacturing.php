@@ -26,6 +26,12 @@ class C_manufacturing extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function getAjaxProduce()
+	{
+		$data['data'] = $this->M_manufacturing->getmanufacturingproduce();
+		echo json_encode($data);
+	}
+
 	public function where(){
         $id=$this->input->get('id_manufacturing');
         $data=$this->M_manufacturing->getmanufacturingWhereId($id);

@@ -29,7 +29,7 @@
                                     <li><a href="<?php echo base_url('C_admin/createmanufacturing'); ?>">Create Manfucturing</a></li>
                                     <li><a href="<?php echo base_url('C_admin/manufacturing'); ?>">Manufacturing Data</a></li>
                                     <li><a href="<?php echo base_url('C_admin/confirmed'); ?>">Confirmed Data</a></li>
-                                    <li><a href="<?php echo base_url('C_admin/inprogress'); ?>">In Progress Data</a></li>
+                                    <li><a href="<?php echo base_url('C_admin/produce'); ?>">In Progress Data</a></li>
                                     <li><a href="<?php echo base_url('C_admin/done'); ?>">Done Data</a></li>
                                 </ul>
                             </li>
