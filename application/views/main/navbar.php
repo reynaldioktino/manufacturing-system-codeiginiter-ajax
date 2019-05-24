@@ -2,7 +2,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="<?php echo base_url(); ?>assets/images/icon/logo.png" alt="logo"></a>
+                    <a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager'); }?>"><img src="<?php echo base_url(); ?>assets/images/icon/logo.png" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -15,22 +15,22 @@
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-grid3"></i><span>Product</span></a>
                                 <ul class="collapse">
-                                    <li><a href="<?php echo base_url('C_admin/product'); ?>">Product Data</a></li>
-                                    <li><a href="<?php echo base_url('C_admin/productcategory'); ?>">Product Category</a></li>
-                                    <li><a href="<?php echo base_url('C_admin/taxes'); ?>">Taxes</a></li>
+                                    <li><a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/product'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/product'); }?>">Product Data</a></li>
+                                    <li><a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/productcategory'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/productcategory'); }?>">Product Category</a></li>
+                                    <li><a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/taxes'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/taxes'); }?>">Taxes</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="<?php echo base_url('C_admin/bom'); ?>" aria-expanded="true"><i class="ti-layers-alt"></i><span>Bill Of Material</span></a>
+                                <a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/bom'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/bom'); }?>" aria-expanded="true"><i class="ti-layers-alt"></i><span>Bill Of Material</span></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-package"></i><span>Manufacturing</span></a>
                                 <ul class="collapse">
-                                    <li><a href="<?php echo base_url('C_admin/createmanufacturing'); ?>">Create Manfucturing</a></li>
-                                    <li><a href="<?php echo base_url('C_admin/manufacturing'); ?>">Manufacturing Data</a></li>
-                                    <li><a href="<?php echo base_url('C_admin/confirmed'); ?>">Confirmed Data</a></li>
-                                    <li><a href="<?php echo base_url('C_admin/produce'); ?>">In Progress Data</a></li>
-                                    <li><a href="<?php echo base_url('C_admin/done'); ?>">Done Data</a></li>
+                                    <li><a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/createmanufacturing'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/createmanufacturing'); }?>">Create Manfucturing</a></li>
+                                    <li><a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/manufacturing'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/manufacturing'); }?>">Manufacturing Data</a></li>
+                                    <li><a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/confirmed'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/confirmed'); }?>">Confirmed Data</a></li>
+                                    <li><a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/produce'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/produce'); }?>">In Progress Data</a></li>
+                                    <li><a href="<?php if($this->session->userdata('level') == "1") { echo base_url('C_admin/done'); } else if ($this->session->userdata('level') == "2") { echo base_url('C_manager/done'); }?>">Done Data</a></li>
                                 </ul>
                             </li>
                             <?php if($this->session->userdata('level') == "1") : ?>
@@ -71,147 +71,6 @@
                     <div class="col-md-6 col-sm-4 clearfix">
                         <ul class="notification-area pull-right">
                             <li id="full-view"><i class="ti-fullscreen"></i></li>
-                            <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                            <li class="dropdown">
-                                <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>2</span>
-                                </i>
-                                <div class="dropdown-menu bell-notify-box notify-box">
-                                    <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
-                                    <div class="nofity-list">
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
-                                            <div class="notify-text">
-                                                <p>New Commetns On Post</p>
-                                                <span>30 Seconds ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
-                                            <div class="notify-text">
-                                                <p>Some special like you</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
-                                            <div class="notify-text">
-                                                <p>New Commetns On Post</p>
-                                                <span>30 Seconds ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
-                                            <div class="notify-text">
-                                                <p>Some special like you</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
-                                <div class="dropdown-menu notify-box nt-enveloper-box">
-                                    <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
-                                    <div class="nofity-list">
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img1.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img2.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">When you can connect with me...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img3.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">I missed you so much...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img4.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Your product is completely Ready...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img2.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img1.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="<?php echo base_url(); ?>assets/images/author/author-img3.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Aglae Mayer</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="settings-btn">
-                                <i class="ti-settings"></i>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -222,19 +81,15 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Dashboard</h4>
-                            <ul class="breadcrumbs pull-left">
-                                <li><a href="index.html">Home</a></li>
-                                <li><span>Dashboard</span></li>
-                            </ul>
+                            <h4 class="page-title pull-left">Manufaturing System</h4>
                         </div>
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="<?php echo base_url(); ?>assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Administrator <i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('name'); ?> <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Message</a>
+                                <!-- <a class="dropdown-item" href="#">Message</a> -->
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <a class="dropdown-item" href="<?php echo base_url('C_login/logout'); ?>">Log Out</a>
                             </div>

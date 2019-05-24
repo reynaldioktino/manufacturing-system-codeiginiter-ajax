@@ -44,7 +44,7 @@ class C_user extends CI_Controller {
 			'id_user'=>$this->input->post('id_user'),
 			'name'=>$this->input->post('name'),
 			'email'=>$this->input->post('email'),
-			'password'=>$this->input->post('password'),
+			'password'=>md5($this->input->post('password')),
 			'address'=>$this->input->post('address'),
 			'phone'=>$this->input->post('phone'),
 			'level'=>$this->input->post('level')

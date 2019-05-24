@@ -7,9 +7,6 @@ class C_taxes extends CI_Controller {
 		parent::__construct();
 		$this->load->model('M_taxes');
 
-		if($this->session->userdata('level') != "1") {  
-			redirect('');  
-		}
 	} 
 
 	public function getAjax()

@@ -6,10 +6,6 @@ class C_product_category extends CI_Controller {
 	function __construct(){ 
 		parent::__construct();
 		$this->load->model('M_product_category');
-
-		if($this->session->userdata('level') != "1") {  
-			redirect('');  
-		}
 	} 
 
 	public function getAjax()

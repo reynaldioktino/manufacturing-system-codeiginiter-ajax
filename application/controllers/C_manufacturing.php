@@ -8,10 +8,6 @@ class C_manufacturing extends CI_Controller {
 		$this->load->model('M_manufacturing');
 		$this->load->model('M_bom');
 		$this->load->model('M_product');
-
-		if($this->session->userdata('level') != "1") {  
-			redirect('');  
-		}
 	} 
 
 	public function getAjax()

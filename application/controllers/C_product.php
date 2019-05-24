@@ -8,10 +8,6 @@ class C_product extends CI_Controller {
 		$this->load->model('M_product');
 		$this->load->model('M_product_category');
 		$this->load->model('M_taxes');
-
-		if($this->session->userdata('level') != "1") {  
-			redirect('');  
-		}
 	} 
 
 	public function getAjax()

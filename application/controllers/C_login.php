@@ -26,7 +26,8 @@ class C_login extends CI_Controller {
 		if($cek>0){//jika ada ditabel
 			$data_session=array(
 					'email'=>$cek->email,
-					'level'=> $cek->level
+					'level'=> $cek->level,
+					'name' => $cek->name
 				);
 			$this->session->set_userdata($data_session);  
 			if($this->session->userdata('level')==1) {   

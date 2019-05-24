@@ -8,9 +8,6 @@ class C_bom extends CI_Controller {
 		$this->load->model('M_bom');
 		$this->load->model('M_product');
 
-		if($this->session->userdata('level') != "1") {  
-			redirect('');  
-		}
 	} 
 
 	public function getAjax()
@@ -54,8 +51,7 @@ class C_bom extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function detail() {
-		$id = $this->uri->segment(3);
+	public function detail($id) {
 		$data['product']=$this->M_product->listproduct();
 		$data['product_bom'] = $this->M_bom->product_bom($id);
 		$this->load->view('menu/detailbom', $data);
