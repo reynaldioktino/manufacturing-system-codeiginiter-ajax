@@ -75,6 +75,10 @@ class M_manufacturing extends CI_Model{
 	public function delete($where){
 		$this->db->query("DELETE FROM manufacturing where id_manufacturing='$where'");
 	}
+
+	public function updatestatus($data, $where){
+		$query=$this->db->query("UPDATE manufacturing SET status='$data' WHERE id_manufacturing='$where'");
+	}
 	
 }
 ?>

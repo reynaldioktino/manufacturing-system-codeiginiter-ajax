@@ -79,14 +79,32 @@ class C_manufacturing extends CI_Controller {
 	}
 
 	public function produce() {
-		//ambil data manufacturing yang dibutuhkan
-		// foreach ($detail_bom as $key => $value)
-  		// $qty = $manufacturing[0]->quantity; $bom = $value->quantity; $consumed = $qty*$bom; (jadi pengurang)
-  		// $value->sp; (nilai awal)
-  		// nilaiakhir = nilaiawal - consumed
-  		// update stok produk
-  		// update status produce
+		$id_manufacturing = $this->input->post('id_manufacturing');
+		$id_product = $this->input->post('id_product');
+		$id_bom = $this->input->post('id_bom');
+		$quantity = $this->input->post('quantity');
 
+		//Update Stok BOM
+		$detail_bom = $this->M_bom->getdetailbomid($id_bom);
+		foreach ($detail_bom as $key => $value) {
+			$consumed = $quantity * $value->quantity;
+			$newstok = $value->sp - $consumed;
+			$updatestok = $this->M_product->updatestok($newstok, $value->id_product);
+		}
+
+		//Update Stok Product Manufacturing
+		$product_array = $this->M_product->getproductWhereId($id_product);
+		foreach($product_array as $product){
+		    $stok = $product->stok;
+		}
+		$stokman = $stok + $quantity;
+		$updatestok = $this->M_product->updatestok($stokman, $id_product);
+
+		//Update Produce Status
+		$status = "produce";
+		$updatestatus = $this->M_manufacturing->updatestatus($status, $id_manufacturing);
+
+		redirect('C_admin/confirmed');
 	}
 
 }

@@ -99,7 +99,7 @@ class C_product extends CI_Controller {
 			'stok'=>$this->input->post('stok')
 		);
 		$where=$this->input->post('id_product');
-		$data=$this->M_product->updatestok($dat, $where);
+		$data=$this->M_product->update($dat, $where);
 		echo json_encode($data);
 	}
 

@@ -26,8 +26,11 @@ class M_product extends CI_Model{
 
 	public function getproductWhereId($id)
 	{
-		$query=$this->db->query("SELECT * FROM product where id_product='$id'");
-		return $query->result();
+		$this->db->select('*');
+        $this->db->from('product');
+        $this->db->where('id_product', $id);
+        $query = $this->db->get();
+        return $query->result();
 	}
 
 	public function getstokWhereId($where)
@@ -84,9 +87,7 @@ class M_product extends CI_Model{
 	}
 
 	public function updatestok($data, $where){
-		$this->db->set($data);
-		$this->db->where("id_product", $where);
-		$this->db->update('product', $data);
+		$query=$this->db->query("UPDATE product SET stok='$data' WHERE id_product='$where'");
 	}
 
 	public function delete($where){

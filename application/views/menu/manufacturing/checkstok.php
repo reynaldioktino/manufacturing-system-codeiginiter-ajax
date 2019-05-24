@@ -29,11 +29,13 @@
                                         <h4 class="header-title">Manufacturing <?php echo $manufacturing[0]->pn; ?></h4>
                                         <form action="<?php echo base_url('C_manufacturing/produce'); ?>" method="POST">
                                         	<input type="hidden" name="id_manufacturing" value="<?php echo $manufacturing[0]->id_manufacturing; ?>">
+                                        	<input type="hidden" name="id_bom" value="<?php echo $manufacturing[0]->id_bom; ?>">
+                                        	<input type="hidden" name="id_product" value="<?php echo $manufacturing[0]->id_product; ?>">
                                         	<div class="row">
                                         		<div class="col-md-6">
                                         			<div class="form-group">
 		                                                <label for="id_product" class="col-form-label">Product</label>
-		                                                <input type="text" class="form-control" name="id_product" id="id_product" value="<?php echo $manufacturing[0]->pn; ?>" readonly>
+		                                                <input type="text" class="form-control" name="product" id="product" value="<?php echo $manufacturing[0]->pn; ?>" readonly>
 		                                            </div>
 		                                            <div class="form-group">
 		                                                <label for="quantity" class="col-form-label">Quantity</label>
@@ -41,7 +43,7 @@
 		                                            </div>
 		                                            <div class="form-group">
 		                                                <label for="id_bom" class="col-form-label">Bill Of Material</label>
-		                                                <input type="text" class="form-control" name="id_product" id="id_product" value="<?php echo $manufacturing[0]->pn; ?>" readonly>
+		                                                <input type="text" class="form-control" name="bom" id="bom" value="<?php echo $manufacturing[0]->pn; ?>" readonly>
 		                                            </div>
                                         		</div>
                                         		<div class="col-md-6">
@@ -51,7 +53,7 @@
 		                                            </div>
 		                                            <div class="form-group">
 		                                                <label for="id_user" class="col-form-label">Responsible</label>
-		                                                <input type="text" class="form-control" name="quantity" id="quantity" value="<?php echo $manufacturing[0]->un; ?>" readonly><br><br>
+		                                                <input type="text" class="form-control" name="responsible" id="responsible" value="<?php echo $manufacturing[0]->un; ?>" readonly><br><br>
 		                                            </div>
 		                                            <div class="form-group">
 		                                            	<div class="row">
