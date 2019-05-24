@@ -65,4 +65,8 @@ class C_admin extends CI_Controller {
 		$this->load->view('menu/manufacturing/produce');
 	}
 
+	public function done() {
+		$this->load->view('menu/manufacturing/done');
+	}
+
 }

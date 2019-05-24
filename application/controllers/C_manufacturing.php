@@ -32,6 +32,12 @@ class C_manufacturing extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function getAjaxDone()
+	{
+		$data['data'] = $this->M_manufacturing->getmanufacturingdone();
+		echo json_encode($data);
+	}
+
 	public function where(){
         $id=$this->input->get('id_manufacturing');
         $data=$this->M_manufacturing->getmanufacturingWhereId($id);
@@ -110,7 +116,14 @@ class C_manufacturing extends CI_Controller {
 		$status = "produce";
 		$updatestatus = $this->M_manufacturing->updatestatus($status, $id_manufacturing);
 
-		redirect('C_admin/confirmed');
+		redirect('C_admin/produce');
+	}
+
+	public function done($id_manufacturing) {
+		$status = "done";
+		$updatestatus = $this->M_manufacturing->updatestatus($status, $id_manufacturing);
+
+		redirect('C_admin/done');
 	}
 
 }

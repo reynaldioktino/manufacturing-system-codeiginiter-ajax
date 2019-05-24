@@ -24,7 +24,7 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Produce Data</h4><br>
+                                <h4 class="header-title">Done Produce Data</h4><br>
                                 <div class="data-tables datatable-dark">
                                     <table id="myTable" class="text-center">
                                         <thead class="text-capitalize">
@@ -36,7 +36,6 @@
                                                 <th>Deadline Start</th>
                                                 <th>Responsible</th>
                                                 <th>Status</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="show_data">
@@ -270,7 +269,7 @@
         var rownumber = 0;
         var tableajax = $('#myTable').DataTable({
           responsive: true,
-            ajax: '<?php echo base_url("C_manufacturing/getAjaxProduce") ?>',
+            ajax: '<?php echo base_url("C_manufacturing/getAjaxDone") ?>',
             columns: [
              { 
                 data: null,
@@ -285,13 +284,6 @@
              { data: 'deadline_start' },
              { data: 'un' },
              { data: 'status' },
-             {
-              data: null,
-              render: function ( data, type, row ) {
-                var ret = '<a href="<?php echo base_url()?>C_manufacturing/done/'+row.id_manufacturing+'" class="btn btn-primary btn-sm text-white">Mark as Done</a>';
-                return ret;
-               }
-             }
              ]
         });
 
