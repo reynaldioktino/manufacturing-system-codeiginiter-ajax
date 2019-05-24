@@ -283,7 +283,12 @@
              { data: 'id_bom' },
              { data: 'deadline_start' },
              { data: 'un' },
-             { data: 'status' },
+             {
+                data: null,
+                render: function (data, type, row) {
+                return '<span class="badge badge-success"><h7>'+row.status+'</h7></span>';
+                }
+             },
              ]
         });
 

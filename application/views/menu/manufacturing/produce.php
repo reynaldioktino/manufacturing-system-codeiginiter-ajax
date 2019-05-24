@@ -284,11 +284,16 @@
              { data: 'id_bom' },
              { data: 'deadline_start' },
              { data: 'un' },
-             { data: 'status' },
+             {
+                data: null,
+                render: function (data, type, row) {
+                return '<span class="badge badge-info"><h7>'+row.status+'</h7></span>';
+                }
+             },
              {
               data: null,
               render: function ( data, type, row ) {
-                var ret = '<a href="<?php echo base_url()?>C_manufacturing/done/'+row.id_manufacturing+'" class="btn btn-primary btn-sm text-white">Mark as Done</a>';
+                var ret = '<a href="<?php echo base_url()?>C_manufacturing/done/'+row.id_manufacturing+'" class="btn btn-success btn-sm text-white">Mark as Done</a>';
                 return ret;
                }
              }

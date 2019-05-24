@@ -414,7 +414,12 @@
              { data: 'id_bom' },
              { data: 'deadline_start' },
              { data: 'un' },
-             { data: 'status' },
+             {
+                data: null,
+                render: function (data, type, row) {
+                return '<span class="badge badge-danger"><h7>'+row.status+'</h7></span>';
+                }
+             },
              {
               data: null,
               render: function ( data, type, row ) {
