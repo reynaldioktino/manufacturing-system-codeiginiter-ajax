@@ -79,6 +79,13 @@ class C_manufacturing extends CI_Controller {
 	}
 
 	public function produce() {
+		//ambil data manufacturing yang dibutuhkan
+		// foreach ($detail_bom as $key => $value)
+  		// $qty = $manufacturing[0]->quantity; $bom = $value->quantity; $consumed = $qty*$bom; (jadi pengurang)
+  		// $value->sp; (nilai awal)
+  		// nilaiakhir = nilaiawal - consumed
+  		// update stok produk
+  		// update status produce
 
 	}
 
