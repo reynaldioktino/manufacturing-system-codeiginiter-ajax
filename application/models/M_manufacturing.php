@@ -16,8 +16,10 @@ class M_manufacturing extends CI_Model{
 
 	public function getmanufacturing()
 	{
-		$this->db->select('*');
+		$this->db->select('manufacturing.*, product.product_name as pn, user.name as un');
         $this->db->from('manufacturing');
+        $this->db->join('product','product.id_product=manufacturing.id_product');
+        $this->db->join('user','user.id_user=manufacturing.id_user');
         $query = $this->db->get();
         return $query->result();
 	}

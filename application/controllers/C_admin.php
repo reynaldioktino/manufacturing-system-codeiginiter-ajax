@@ -10,6 +10,7 @@ class C_admin extends CI_Controller {
 		$this->load->model('M_product');
 		$this->load->model('M_bom');
 		$this->load->model('M_user');
+		$this->load->model('M_manufacturing');
 		// $this->load->library(array('session'));
 		// $this->load->library('user_agent'); //deklarasi mengaktifkan library pagination
 		if($this->session->userdata('level') != "1") {  
@@ -67,6 +68,11 @@ class C_admin extends CI_Controller {
 
 	public function done() {
 		$this->load->view('menu/manufacturing/done');
+	}
+
+	public function manufacturing() {
+		$data['manufacturing']=$this->M_manufacturing->getmanufacturing();
+		$this->load->view('menu/manufacturing/manufacturing', $data);
 	}
 
 }

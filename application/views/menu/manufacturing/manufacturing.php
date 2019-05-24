@@ -38,8 +38,18 @@
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="show_data">
-                                            
+                                        <tbody>
+                                            <?php $i=1; foreach ($manufacturing as $key => $value) : ?>
+                                            <tr>
+                                                <td><?php echo $i; ?></td>
+                                                <td><?php echo $value->pn; ?></td>
+                                                <td><?php echo $value->quantity; ?></td>
+                                                <td><?php echo $value->id_bom; ?></td>
+                                                <td><?php echo $value->deadline_start; ?></td>
+                                                <td><?php echo $value->un; ?></td>
+                                                <td><span class="badge <?php if($value->status == "produce") { echo "badge-primary"; } else if($value->status == "done") { echo "badge-success"; } else { echo "badge-danger"; } ?> "><?php echo $value->status; ?></span></td>
+                                            </tr>
+                                            <?php $i++; endforeach; ?>
                                     </table>
                                 </div>
                             </div>
@@ -268,30 +278,8 @@
 
         var rownumber = 0;
         var tableajax = $('#myTable').DataTable({
-          responsive: true,
-            ajax: '<?php echo base_url("C_manufacturing/getAjaxDone") ?>',
-            columns: [
-             { 
-                data: null,
-                render: function(data,type,row){
-                    rownumber++;
-                    return rownumber;
-                }
-             },
-             { data: 'pn'},
-             { data: 'quantity' },
-             { data: 'id_bom' },
-             { data: 'deadline_start' },
-             { data: 'un' },
-             {
-                data: null,
-                render: function (data, type, row) {
-                return '<span class="badge badge-success"><h7>'+row.status+'</h7></span>';
-                }
-             },
-             ]
-        });
-
+          responsive: true
+      });
     });
 
 </script>
