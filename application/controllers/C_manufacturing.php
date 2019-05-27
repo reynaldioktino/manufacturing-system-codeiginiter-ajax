@@ -57,12 +57,8 @@ class C_manufacturing extends CI_Controller {
 	public function update(){
 		$dat=array(
 			'id_manufacturing'=>$this->input->post('id_manufacturing'),
-			'name'=>$this->input->post('name'),
-			'email'=>$this->input->post('email'),
-			'password'=>$this->input->post('password'),
-			'address'=>$this->input->post('address'),
-			'phone'=>$this->input->post('phone'),
-			'level'=>$this->input->post('level')
+			'quantity'=>$this->input->post('quantity'),
+			'deadline_start'=>$this->input->post('deadline_start')
 		);
 		$where=$this->input->post('id_manufacturing');
 		$data=$this->M_manufacturing->update($dat, $where);

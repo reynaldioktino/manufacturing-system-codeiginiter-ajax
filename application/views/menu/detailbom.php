@@ -219,7 +219,7 @@
         var rownumber = 0;
         var tableajax = $('#myTable').DataTable({
           responsive: true,
-            ajax: '<?php echo base_url("C_bom/getAjaxDetail") ?>',
+            ajax: '<?php echo base_url("C_bom/getAjaxDetail/") ?><?php echo $product_bom[0]->id_bom; ?>',
             columns: [
              { 
                 data: null,
@@ -254,7 +254,6 @@
                 success: function(data){
                     $('[name="id_product_add"]').val("");
                     $('[name="quantity_add"]').val("");
-                    $('[name="id_bom_add"]').val("");
                     $('#ModalAdd').modal('hide');
                     // tampil_data();
                     rownumber=0;

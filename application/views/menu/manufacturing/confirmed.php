@@ -278,19 +278,17 @@
         //Update Barang
         $('#btn_update').on('click',function(){
             var id_manufacturing=$('#id_manufacturing2').val();
-            var id_product=$('#id_product2').val();
             var quantity=$('#quantity2').val();
-            var manufacturing_type=$('#manufacturing_type2').val();
+            var deadline_start=$('#deadline_start2').val();
             $.ajax({
                 type : "POST",
                 url  : "<?php echo base_url('C_manufacturing/update')?>",
                 dataType : "JSON",
-                data : {id_manufacturing:id_manufacturing, id_product:id_product, quantity:quantity, manufacturing_type:manufacturing_type},
+                data : {id_manufacturing:id_manufacturing, quantity:quantity, deadline_start:deadline_start},
                 success: function(data){
                     $('[name="id_manufacturing_edit"]').val("");
-                    $('[name="id_product_edit"]').val("");
                     $('[name="quantity_edit"]').val("");
-                    $('[name="manufacturing_type_edit"]').val("");
+                    $('[name="deadline_start_edit"]').val("");
                     $('#ModalUpdate').modal('hide');
                     // tampil_data();
                     rownumber=0;

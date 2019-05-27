@@ -27,6 +27,7 @@ class M_bom extends CI_Model{
 		$this->db->select('bom.*, product.product_name as pn, product.foto as fp');
         $this->db->from('bom');
         $this->db->join('product','product.id_product=bom.id_product');
+        $this->db->where('id_bom', $id);
         $query = $this->db->get();
         return $query->result();
 	}
@@ -63,11 +64,12 @@ class M_bom extends CI_Model{
 	}
 
 
-	public function getbomdetail()
+	public function getbomdetail($id)
 	{
 		$this->db->select('detail_bom.*, product.product_name as pn');
         $this->db->from('detail_bom');
         $this->db->join('product','product.id_product=detail_bom.id_product');
+        $this->db->where('id_bom', $id);
         $query = $this->db->get();
         return $query->result();
 	}

@@ -57,9 +57,9 @@ class C_bom extends CI_Controller {
 		$this->load->view('menu/detailbom', $data);
 	}
 
-	public function getAjaxDetail()
+	public function getAjaxDetail($id)
 	{
-		$data['data'] = $this->M_bom->getbomdetail();
+		$data['data'] = $this->M_bom->getbomdetail($id);
 		echo json_encode($data);
 	}
 
