@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 25 Mei 2019 pada 03.26
+-- Generation Time: 27 Mei 2019 pada 16.00
 -- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -38,7 +38,8 @@ CREATE TABLE `bom` (
 --
 
 INSERT INTO `bom` (`id_bom`, `id_product`, `quantity`, `bom_type`) VALUES
-(2, 4, '1', 'Manufacture this product');
+(1, 4, '1', 'Manufacture this product'),
+(2, 3, '1', 'Manufacture this product');
 
 -- --------------------------------------------------------
 
@@ -58,10 +59,13 @@ CREATE TABLE `detail_bom` (
 --
 
 INSERT INTO `detail_bom` (`id_detail_bom`, `id_bom`, `id_product`, `quantity`) VALUES
-(1, 2, 5, '1'),
-(3, 2, 7, '1'),
-(10, 2, 8, '2'),
-(12, 2, 6, '1');
+(1, 1, 1, '1'),
+(4, 1, 5, '1'),
+(7, 1, 6, '1'),
+(10, 1, 8, '1'),
+(11, 1, 7, '2'),
+(12, 2, 9, '2'),
+(13, 2, 11, '2');
 
 -- --------------------------------------------------------
 
@@ -84,10 +88,18 @@ CREATE TABLE `manufacturing` (
 --
 
 INSERT INTO `manufacturing` (`id_manufacturing`, `id_product`, `id_bom`, `id_user`, `quantity`, `deadline_start`, `status`) VALUES
-(4, 4, 2, 1, '5', '2019-05-27', 'done'),
-(5, 4, 2, 1, '10', '2019-05-29', 'done'),
-(6, 4, 2, 1, '15', '2019-05-31', 'confirmed'),
-(7, 4, 2, 1, '20', '2019-05-31', 'produce');
+(1, 4, 1, 1, '50', '2019-01-25', 'confirmed'),
+(2, 4, 1, 1, '100', '2019-02-20', 'produce'),
+(3, 4, 1, 1, '20', '2019-03-26', 'done'),
+(4, 4, 1, 1, '70', '2019-04-06', 'done'),
+(5, 4, 1, 1, '120', '2019-05-23', 'done'),
+(6, 4, 1, 1, '170', '2019-06-23', 'confirmed'),
+(8, 4, 1, 1, '140', '2019-08-23', 'produce'),
+(9, 4, 1, 1, '110', '2019-09-23', 'produce'),
+(10, 4, 1, 1, '190', '2019-10-23', 'produce'),
+(11, 4, 1, 1, '210', '2019-11-23', 'done'),
+(12, 4, 1, 1, '20', '2019-12-23', 'done'),
+(13, 4, 1, 1, '100', '2019-07-11', 'produce');
 
 -- --------------------------------------------------------
 
@@ -112,11 +124,18 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id_product`, `product_name`, `product_type`, `sales_price`, `id_tax`, `id_product_category`, `stok`, `internal_notes`, `foto`) VALUES
-(4, 'PC Full Set Acer', 'Storable Product', '5000000', 1, 2, '40', 'PC Complete Feature Full Set', 'toko-komputer-online.jpg'),
-(5, 'Monitor Acer', 'Storable Product', '1000000', 1, 1, '460', 'Monitor For PC Full Set Acer', 'imageService.jpg'),
-(6, 'Mouse Acer', 'Storable Product', '200000', 1, 1, '160', 'Mouse For Acer PC Kit', 'acer-wireless-mouse-500x500.jpg'),
-(7, 'CPU Acer PC', 'Storable Product', '2500000', 1, 1, '260', 'CPU For Acer PC Kit Full Set', '41VqxZ2lUlL.jpg'),
-(8, 'Creative A200 Speaker', 'Storable Product', '250000', 1, 1, '220', 'Speaker For Acer PC Full Kit', 'creative-a120-500x500.jpg');
+(1, 'Mouse Logitech', 'Storable Product', '200000', 1, 1, '300', 'Mouse From Logitech Corp', 'logitech-wired-optical-mouse-m100r-black-30.jpg'),
+(3, 'Polygon Bike', 'Storable Product', '10000000', 2, 3, '0', 'Polygon Bike Package', 'collosus.jpg'),
+(4, 'Acer PC Package', 'Storable Product', '6000000', 1, 4, '100', 'Acer PC Package for Sale', 'Aspire_X1700_L_1.jpg'),
+(5, 'Monitor Acer', 'Storable Product', '1500000', 1, 1, '300', 'Monitor Acer For Acer PC Package', '51vxfozze-L__SX425_.jpg'),
+(6, 'Keyboard Logitech', 'Storable Product', '400000', 1, 1, '700', 'Keyboard From Logitech Corp', '705f200e3f4be1628dcd7fba48fd1cbffa3c1717.jpg'),
+(7, 'Sound PC Logitech', 'Storable Product', '500000', 1, 1, '1000', 'Sound PC From Logitech Corp', 'u_21775700.jpg'),
+(8, 'CPU Acer PC', 'Storable Product', '2000000', 1, 1, '500', 'CPU Acer PC For Acer PC Package', '5ba8a16bbf84b.jpg'),
+(9, 'MTB Bicycle Tire', 'Storable Product', '500000', 2, 2, '0', 'Ban Sepeda Untuk Product Polygon', '263939x21-h5166-collapsible-mtb-bicycle-tire-6249-623707161-b7d72f974c2bf82f25406d7e625900b9-.jpg'),
+(10, 'Ritchey MTB', 'Storable Product', '3000000', 2, 2, '0', 'Body Sepeda Untuk Poligon', 'frameset-breakaway-cross-green-yellow-angle.jpg'),
+(11, 'DMZ V12 Montain Bike Pedals Black', 'Storable Product', '200000', 2, 2, '0', 'Pedal Untuk Poligon', '16886_1_Zoom.jpg'),
+(12, 'SDL 501 Black', 'Storable Product', '400000', 2, 2, '0', 'Sadel Untuk Sepeda Poligon', 'sdl0501-035_aeffect_blk_img1.jpg'),
+(13, 'Giant Connect IX 701', 'Storable Product', '1000000', 2, 2, '0', 'Stir Untuk Sepeda Poligon', 'handle-bar-mtb-flat-sumber-googling.jpg');
 
 -- --------------------------------------------------------
 
@@ -135,8 +154,10 @@ CREATE TABLE `product_category` (
 --
 
 INSERT INTO `product_category` (`id_product_category`, `name_category`, `strategy`) VALUES
-(1, 'Component', 'FIFO'),
-(2, 'Sell Product', 'FIFO');
+(1, 'PC Component', 'FIFO'),
+(2, 'Bike Component', 'FIFO'),
+(3, 'Bike Package', 'FIFO'),
+(4, 'PC Package', 'FIFO');
 
 -- --------------------------------------------------------
 
@@ -184,7 +205,7 @@ INSERT INTO `user` (`id_user`, `name`, `email`, `password`, `address`, `phone`, 
 (3, 'Alin', 'alin@gmail.com', '8df03bca3f48d310f74fe6092af08c95', 'Tangerang', '12342', '2'),
 (4, 'Reza', 'reza@gmail.com', 'bb98b1d0b523d5e783f931550d7702b6', 'Kediri', '081233454545', '2'),
 (5, 'Lukman', 'lukman@gmail.com', 'b5bbc8cf472072baffe920e4e28ee29c', 'Turen', '08562677333', '2'),
-(6, 'Info Admin', 'info@manufacturing.com', 'caf9b6b99962bf5c2264824231d7a40c', 'PT Manufacturing', '3322111', '1');
+(6, 'Info Admin', 'info@manufacturing.com', '21232f297a57a5a743894a0e4a801fc3', 'PT Manufacturing', '3322111', '1');
 
 --
 -- Indexes for dumped tables
@@ -254,22 +275,22 @@ ALTER TABLE `bom`
 -- AUTO_INCREMENT for table `detail_bom`
 --
 ALTER TABLE `detail_bom`
-  MODIFY `id_detail_bom` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_detail_bom` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `manufacturing`
 --
 ALTER TABLE `manufacturing`
-  MODIFY `id_manufacturing` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_manufacturing` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id_product` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_product` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id_product_category` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_product_category` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `taxes`
 --
